@@ -1,8 +1,12 @@
 package orme.dominic.canvasfiller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import orme.dominic.canvasfiller.dto.Point;
+import orme.dominic.canvasfiller.dto.StreamMessage;
 import orme.dominic.canvasfiller.service.PixelService;
 
 import java.util.ArrayList;
@@ -16,6 +20,29 @@ public class CanvasController {
     @GetMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
+    }
+
+    @MessageMapping("/test")
+    @SendTo("/outgoing/test")
+    public String testIndex() { return "Greetings from Spring Boot WebSocket!"; }
+
+    @MessageMapping("/pixels/{queueName}")
+    @SendTo("/outgoing/greetings")
+    public String getDataStream(StreamMessage message) throws Exception {
+        System.out.println(message);
+        return "Hello world";
+//        String queueName = message.queueName();
+//        String retry = message.retry();
+//        boolean isFinished = this.pixelService.isFinished(queueName);
+//        // We're just mopping up.
+//        if (isFinished && this.pixelService.numberInQueue(queueName) == 0) {
+//            // If there's nothing left in the queue, there's nothing else coming either. So we can end.
+//            return "end";
+//        }
+//
+//        ArrayList<Point> points = this.pixelService.getPoints(queueName, retry);
+//
+//        return points.stream().map(Point::toString).collect(Collectors.joining("|"));
     }
 
     @PostMapping("/start")
