@@ -1,4 +1,4 @@
-package orme.dominic.canvasfiller.checkers;
+package orme.dominic.canvasfiller.generator.checkers;
 
 import orme.dominic.canvasfiller.dto.Colour;
 

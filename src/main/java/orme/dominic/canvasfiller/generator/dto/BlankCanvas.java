@@ -1,4 +1,4 @@
-package orme.dominic.canvasfiller.dto;
+package orme.dominic.canvasfiller.generator.dto;
 
 import java.util.Vector;
 

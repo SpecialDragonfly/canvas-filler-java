@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(canvasHandler(),"/chat-example").setAllowedOrigins("*");
+        registry.addHandler(canvasHandler(),"/canvas-filler").setAllowedOrigins("*");
         registry.addHandler(heartbeatHandler(), "/heartbeat").setAllowedOrigins("*");
     }
 

@@ -1,13 +1,8 @@
 package orme.dominic.canvasfiller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
-import orme.dominic.canvasfiller.dto.Message;
 import orme.dominic.canvasfiller.dto.Point;
-import orme.dominic.canvasfiller.dto.StreamMessage;
 import orme.dominic.canvasfiller.service.PixelService;
 
 import java.util.ArrayList;
