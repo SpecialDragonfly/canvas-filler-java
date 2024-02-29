@@ -41,6 +41,7 @@ public class CanvasHandler extends TextWebSocketHandler {
                     this.pixelService.start(session, session.getId(), result.width(), result.height(), result.type(), result.blur());
                     break;
                 case "stop":
+                    this.sessions.remove(session.getId());
                     break;
                 default:
                     // error
