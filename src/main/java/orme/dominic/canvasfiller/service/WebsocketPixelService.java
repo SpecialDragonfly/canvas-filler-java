@@ -20,6 +20,10 @@ public class WebsocketPixelService {
             .collect(Collectors.joining("|"));
     }
 
+    public void remove(String id) {
+        this.canvases.remove(id);
+    }
+
     @Async("PixelServiceThreads")
     public void start(WebSocketSession session, String queueName, int width, int height, String type, int blur) throws Exception {
 
