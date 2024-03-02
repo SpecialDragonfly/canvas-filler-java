@@ -16,7 +16,7 @@ public class WebsocketPixelService {
     public String toString() {
         return this.canvases.keySet()
             .stream()
-            .map(k -> "{\"id\":\"" + k + "\", \"remaining-points:\":" + this.canvases.get(k).getRemainingPointCount() + ",\"generator\":\"" + this.canvases.get(k).getGeneratorName() + "\"")
+            .map(k -> "{\"id\":\"" + k + "\", \"remaining-points:\":" + this.canvases.get(k).getRemainingPointCount() + ",\"generator\":\"" + this.canvases.get(k).getGeneratorName() + "\"}")
             .collect(Collectors.joining("|"));
     }
 
