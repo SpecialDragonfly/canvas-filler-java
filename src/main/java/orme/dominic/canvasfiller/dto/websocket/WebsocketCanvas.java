@@ -50,4 +50,9 @@ public class WebsocketCanvas implements CanvasInterface {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    @Override
+    public String getGeneratorName() {
+        return this.generator.toString();
+    }
 }

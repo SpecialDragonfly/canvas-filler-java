@@ -12,4 +12,6 @@ public interface CanvasInterface {
     int getRemainingPointCount();
 
     void start();
+
+    String getGeneratorName();
 }

@@ -10,4 +10,6 @@ public interface GeneratorInterface {
     void start(CanvasInterface canvas) throws Exception;
 
     Point getPoint(int row, int column);
+
+    String toString();
 }

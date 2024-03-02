@@ -6,6 +6,12 @@ import orme.dominic.canvasfiller.generator.dto.BlankCanvas;
 
 public class SequentialGenerator implements GeneratorInterface {
     BlankCanvas<Colour> blankCanvas;
+
+    @Override
+    public String toString() {
+        return "SEQUENTIAL";
+    }
+
     @Override
     @Async
     public void start(CanvasInterface canvas) throws Exception {
