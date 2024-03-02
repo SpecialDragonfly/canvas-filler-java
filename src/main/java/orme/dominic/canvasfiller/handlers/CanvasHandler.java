@@ -55,6 +55,7 @@ public class CanvasHandler extends TextWebSocketHandler {
                     System.out.println("Clearing memory for " + parts[1]);
                     if (!this.sessions.containsKey(parts[1])) {
                         System.out.println("Sessions doesn't contain key: " + parts[1]);
+                        System.out.println("Session keys are: " + this.sessions.keySet());
                     }
                     this.sessions.remove(parts[1]);
                     break;
