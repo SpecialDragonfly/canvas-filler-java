@@ -38,8 +38,13 @@ public class AllColoursGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "ALLCOLOURS";
+    }
+
+    @Override
     @Async("GeneratorThreads")
-    public void start(CanvasInterface canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());
 
         int height = canvas.getHeight();
@@ -49,7 +54,7 @@ public class AllColoursGenerator implements GeneratorInterface {
                 Colour c = this.getColourForPoint(row, column);
                 this.colours[c.r()][c.g()][c.b()] = false;
                 this.blankCanvas.setValue(row, column, c);
-                canvas.getQueue().add(new Point(column, row, c.r(), c.g(), c.b()));
+                canvas.getQueue().addPoint(new Point(column, row, c.r(), c.g(), c.b()));
 
                 canvas.decrementPoint();
                 if (canvas.getQueue().size() > 50000) {

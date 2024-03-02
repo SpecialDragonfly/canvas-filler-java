@@ -30,20 +30,34 @@ public class CanvasHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
         String payload = message.getPayload();
 
+        System.out.println("Message came in with payload: " + payload);
+
         // payload has the format: <command>|<JSON arguments>
 
-        String[] parts = payload.split("/\\|/", 2);
+        String[] parts = payload.split("\\|", 2);
         ObjectMapper jsonParser = new ObjectMapper();
         try {
             switch (parts[0]) {
                 case "start":
+                    System.out.println("Command was start");
                     StartCommand result = jsonParser.readValue(parts[1], StartCommand.class);
                     this.pixelService.start(session, session.getId(), result.width(), result.height(), result.type(), result.blur());
                     break;
                 case "stop":
+                    System.out.println("Command was stop");
                     this.sessions.remove(session.getId());
                     break;
+                case "info":
+                    System.out.println("Request for info");
+                    session.sendMessage(new TextMessage(this.pixelService.toString()));
+                    break;
+                case "clear":
+                    System.out.println("Clearing memory for " + parts[1]);
+                    this.pixelService.remove(parts[1]);
+                    this.sessions.remove(parts[1]);
+                    break;
                 default:
+                    System.out.println("Unknown command " + parts[0]);
                     // error
             }
         } catch (JsonProcessingException e) {

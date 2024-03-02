@@ -7,7 +7,9 @@ import orme.dominic.canvasfiller.dto.Point;
 public interface GeneratorInterface {
 
     @Async
-    void start(CanvasInterface canvas);
+    void start(CanvasInterface canvas) throws Exception;
 
     Point getPoint(int row, int column);
+
+    String toString();
 }

@@ -15,9 +15,13 @@ public class WebsocketPixelService {
     // Needs to return all canvases and some level of info.
     public String toString() {
         return this.canvases.keySet()
-                .stream()
-                .map(k -> k + ": " + this.canvases.get(k).getRemainingPointCount())
-                .collect(Collectors.joining("|"));
+            .stream()
+            .map(k -> "{\"id\":\"" + k + "\", \"remaining-points:\":" + this.canvases.get(k).getRemainingPointCount() + ",\"generator\":\"" + this.canvases.get(k).getGeneratorName() + "\"}")
+            .collect(Collectors.joining("|"));
+    }
+
+    public void remove(String id) {
+        this.canvases.remove(id);
     }
 
     @Async("PixelServiceThreads")
@@ -50,6 +54,7 @@ public class WebsocketPixelService {
             System.out.println("Using Empty Generator");
         }
 
+        System.out.println("Started WebSocket Canvas with " + g.getClass() + " w: " + width + " h: " + height);
         this.canvases.put(queueName, new WebsocketCanvas(session, g, width, height));
         this.canvases.get(queueName).start();
     }

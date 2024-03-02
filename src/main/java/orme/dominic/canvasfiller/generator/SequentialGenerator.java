@@ -7,8 +7,13 @@ import orme.dominic.canvasfiller.generator.dto.BlankCanvas;
 public class SequentialGenerator implements GeneratorInterface {
     BlankCanvas<Colour> blankCanvas;
     @Override
+    public String toString() {
+        return "SEQUENTIAL";
+    }
+
+    @Override
     @Async
-    public void start(CanvasInterface canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());
         int r = 0;
         int g = 0;
@@ -16,7 +21,7 @@ public class SequentialGenerator implements GeneratorInterface {
         for (int i = 0; i < canvas.getWidth(); i++) {
             for (int j = 0; j < canvas.getHeight(); j++) {
                 this.blankCanvas.setValue(j, i, new Colour(r, g, b));
-                canvas.getQueue().add(
+                canvas.getQueue().addPoint(
                     new Point(
                         i,
                         j,

@@ -2,6 +2,7 @@ package orme.dominic.canvasfiller.dto.websocket;
 
 import org.springframework.web.socket.WebSocketSession;
 import orme.dominic.canvasfiller.dto.CanvasInterface;
+import orme.dominic.canvasfiller.dto.CanvasQueueInterface;
 import orme.dominic.canvasfiller.dto.Point;
 import orme.dominic.canvasfiller.generator.GeneratorInterface;
 
@@ -10,7 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class WebsocketCanvas implements CanvasInterface {
     private final int width;
     private final int height;
-    private final ConcurrentLinkedQueue<Point> queue;
+    private final CanvasQueueInterface queue;
     private final GeneratorInterface generator;
     private int pointsRemaining;
 
@@ -22,7 +23,7 @@ public class WebsocketCanvas implements CanvasInterface {
         this.generator = generator;
     }
 
-    public ConcurrentLinkedQueue<Point> getQueue() {
+    public CanvasQueueInterface getQueue() {
         return queue;
     }
 
@@ -43,6 +44,15 @@ public class WebsocketCanvas implements CanvasInterface {
     }
 
     public void start() {
-        this.generator.start(this);
+        try {
+            this.generator.start(this);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String getGeneratorName() {
+        return this.generator.toString();
     }
 }

@@ -37,8 +37,13 @@ public class SpiralInGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "SPIRAL-IN";
+    }
+
+    @Override
     @Async("GeneratorThreads")
-    public void start(CanvasInterface canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());
 
         int minHeight = 0;
@@ -52,7 +57,7 @@ public class SpiralInGenerator implements GeneratorInterface {
             Colour c = this.getColourForPoint(row, column);
             this.colours[c.r()][c.g()][c.b()] = false;
             this.blankCanvas.setValue(row, column, c);
-            canvas.getQueue().add(new Point(column, row, c.r(), c.g(), c.b()));
+            canvas.getQueue().addPoint(new Point(column, row, c.r(), c.g(), c.b()));
 
             canvas.decrementPoint();
 

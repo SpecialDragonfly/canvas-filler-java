@@ -15,6 +15,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(canvasHandler(),"/canvas-filler").setAllowedOrigins("*");
         registry.addHandler(heartbeatHandler(), "/heartbeat").setAllowedOrigins("*");
+        registry.addHandler(canvasHandler(), "/admin").setAllowedOrigins("*");
     }
 
     @Bean
@@ -27,5 +28,4 @@ public class WebSocketConfig implements WebSocketConfigurer {
         return new HeartbeatHandler();
     }
 }
-
 

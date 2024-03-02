@@ -1,7 +1,6 @@
 package orme.dominic.canvasfiller.generator;
 
 import org.springframework.scheduling.annotation.Async;
-import orme.dominic.canvasfiller.dto.Canvas;
 import orme.dominic.canvasfiller.dto.CanvasInterface;
 import orme.dominic.canvasfiller.dto.Colour;
 import orme.dominic.canvasfiller.dto.Point;
@@ -24,13 +23,18 @@ public class RandomGenerator implements GeneratorInterface {
         }
     }
 
+    @Override
+    public String toString() {
+        return "RANDOM";
+    }
+
     @Async
-    public void start(CanvasInterface canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         for (int i = 0; i < canvas.getWidth(); i++) {
             for (int j = 0; j < canvas.getHeight(); j++) {
                 Colour c = getColourForPoint();
                 this.colours[c.r()][c.g()][c.b()] = false;
-                canvas.getQueue().add(new Point(i, j, c.r(), c.g(), c.b()));
+                canvas.getQueue().addPoint(new Point(i, j, c.r(), c.g(), c.b()));
                 canvas.decrementPoint();
             }
         }
