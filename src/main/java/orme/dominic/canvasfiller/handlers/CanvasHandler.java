@@ -34,8 +34,7 @@ public class CanvasHandler extends TextWebSocketHandler {
 
         // payload has the format: <command>|<JSON arguments>
 
-        String[] parts = payload.split("/\\|/", 2);
-        System.out.println(parts);
+        String[] parts = payload.split("\\|", 2);
         ObjectMapper jsonParser = new ObjectMapper();
         try {
             switch (parts[0]) {
@@ -48,6 +47,9 @@ public class CanvasHandler extends TextWebSocketHandler {
                     System.out.println("Command was stop");
                     this.sessions.remove(session.getId());
                     break;
+                case "info":
+                    System.out.println("Request for info");
+                    session.sendMessage(new TextMessage(this.pixelService.toString()));
                 default:
                     System.out.println("Unknown command " + parts[0]);
                     // error

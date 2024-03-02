@@ -4,12 +4,11 @@ import orme.dominic.canvasfiller.generator.GeneratorInterface;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Canvas implements CanvasInterface {
     private final int width;
     private final int height;
-    private final ConcurrentLinkedQueue<Point> queue;
+    private final CanvasQueueInterface queue;
     private final GeneratorInterface generator;
     private int pointsRemaining;
     private ArrayList<Point> buffer;
@@ -17,12 +16,12 @@ public class Canvas implements CanvasInterface {
     public Canvas(GeneratorInterface generator, int width, int height) {
         this.width = width;
         this.height = height;
-        this.queue = new ConcurrentLinkedQueue<>();
+        this.queue = new StandardQueue();
         this.pointsRemaining = width * height;
         this.generator = generator;
     }
 
-    public ConcurrentLinkedQueue<Point> getQueue() {
+    public CanvasQueueInterface getQueue() {
         return queue;
     }
 
@@ -43,7 +42,11 @@ public class Canvas implements CanvasInterface {
     }
 
     public void start() {
-        this.generator.start(this);
+        try {
+            this.generator.start(this);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public ArrayList<Point> getBuffer() {
