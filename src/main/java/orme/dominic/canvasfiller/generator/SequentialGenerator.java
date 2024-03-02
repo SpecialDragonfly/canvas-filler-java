@@ -1,24 +1,28 @@
 package orme.dominic.canvasfiller.generator;
 
 import org.springframework.scheduling.annotation.Async;
-import orme.dominic.canvasfiller.dto.BlankCanvas;
-import orme.dominic.canvasfiller.dto.Canvas;
-import orme.dominic.canvasfiller.dto.Colour;
-import orme.dominic.canvasfiller.dto.Point;
+import orme.dominic.canvasfiller.dto.*;
+import orme.dominic.canvasfiller.generator.dto.BlankCanvas;
 
 public class SequentialGenerator implements GeneratorInterface {
     BlankCanvas<Colour> blankCanvas;
+
+    @Override
+    public String toString() {
+        return "SEQUENTIAL";
+    }
+
     @Override
     @Async
-    public void start(Canvas canvas) {
-        this.blankCanvas = new BlankCanvas(canvas.getWidth(), canvas.getHeight());
+    public void start(CanvasInterface canvas) throws Exception {
+        this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());
         int r = 0;
         int g = 0;
         int b = 0;
         for (int i = 0; i < canvas.getWidth(); i++) {
             for (int j = 0; j < canvas.getHeight(); j++) {
                 this.blankCanvas.setValue(j, i, new Colour(r, g, b));
-                canvas.getQueue().add(
+                canvas.getQueue().addPoint(
                     new Point(
                         i,
                         j,

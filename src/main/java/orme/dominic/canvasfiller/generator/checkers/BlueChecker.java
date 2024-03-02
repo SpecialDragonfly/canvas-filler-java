@@ -1,21 +1,21 @@
-package orme.dominic.canvasfiller.checkers;
+package orme.dominic.canvasfiller.generator.checkers;
 
 import orme.dominic.canvasfiller.dto.Colour;
 
-public class GreenChecker implements CheckerInterface {
+public class BlueChecker implements CheckerInterface {
     @Override
     public Colour checkPositive(boolean[][][] colours, int r, int g, int b, int shell) {
-        if (g + shell > 255) {
+        if (b + shell > 255) {
             return null;
         }
 
-        int checkG = g + shell;
+        int checkB = b + shell;
         for (int checkR = r - shell; checkR <= r + shell; checkR++) {
             if (checkR < 0 || checkR > 255) {
                 continue;
             }
-            for (int checkB = b - shell; checkB <= b + shell; checkB++) {
-                if (checkB < 0 || checkB > 255) {
+            for (int checkG = g - shell; checkG <= g + shell; checkG++) {
+                if (checkG < 0 || checkG > 255) {
                     continue;
                 }
                 if (colours[checkR][checkG][checkB]) {
@@ -29,20 +29,19 @@ public class GreenChecker implements CheckerInterface {
 
     @Override
     public Colour checkNegative(boolean[][][] colours, int r, int g, int b, int shell) {
-        if (g - shell < 0) {
+        if (b - shell < 0) {
             return null;
         }
 
-        int checkG = g - shell;
+        int checkB = b - shell;
         for (int checkR = r - shell; checkR <= r + shell; checkR++) {
             if (checkR < 0 || checkR > 255) {
                 continue;
             }
-            for (int checkB = b - shell; checkB <= b + shell; checkB++) {
-                if (checkB < 0 || checkB > 255) {
+            for (int checkG = g - shell; checkG <= g + shell; checkG++) {
+                if (checkG < 0 || checkG > 255) {
                     continue;
                 }
-
                 if (colours[checkR][checkG][checkB]) {
                     return new Colour(checkR, checkG, checkB);
                 }

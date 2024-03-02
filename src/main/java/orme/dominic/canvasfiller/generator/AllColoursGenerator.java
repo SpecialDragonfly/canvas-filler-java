@@ -1,14 +1,12 @@
 package orme.dominic.canvasfiller.generator;
 
 import org.springframework.scheduling.annotation.Async;
-import orme.dominic.canvasfiller.checkers.BlueChecker;
-import orme.dominic.canvasfiller.checkers.CheckerInterface;
-import orme.dominic.canvasfiller.checkers.GreenChecker;
-import orme.dominic.canvasfiller.checkers.RedChecker;
-import orme.dominic.canvasfiller.dto.BlankCanvas;
-import orme.dominic.canvasfiller.dto.Canvas;
-import orme.dominic.canvasfiller.dto.Colour;
-import orme.dominic.canvasfiller.dto.Point;
+import orme.dominic.canvasfiller.generator.checkers.BlueChecker;
+import orme.dominic.canvasfiller.generator.checkers.CheckerInterface;
+import orme.dominic.canvasfiller.generator.checkers.GreenChecker;
+import orme.dominic.canvasfiller.generator.checkers.RedChecker;
+import orme.dominic.canvasfiller.dto.*;
+import orme.dominic.canvasfiller.generator.dto.BlankCanvas;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +38,13 @@ public class AllColoursGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "ALLCOLOURS";
+    }
+
+    @Override
     @Async("GeneratorThreads")
-    public void start(Canvas canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());
 
         int height = canvas.getHeight();
@@ -51,7 +54,7 @@ public class AllColoursGenerator implements GeneratorInterface {
                 Colour c = this.getColourForPoint(row, column);
                 this.colours[c.r()][c.g()][c.b()] = false;
                 this.blankCanvas.setValue(row, column, c);
-                canvas.getQueue().add(new Point(column, row, c.r(), c.g(), c.b()));
+                canvas.getQueue().addPoint(new Point(column, row, c.r(), c.g(), c.b()));
 
                 canvas.decrementPoint();
                 if (canvas.getQueue().size() > 50000) {
