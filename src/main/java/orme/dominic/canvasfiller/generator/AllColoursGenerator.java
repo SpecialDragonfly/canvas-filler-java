@@ -38,6 +38,11 @@ public class AllColoursGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "ALLCOLOURS";
+    }
+
+    @Override
     @Async("GeneratorThreads")
     public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());

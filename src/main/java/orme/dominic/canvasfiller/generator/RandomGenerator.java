@@ -23,6 +23,11 @@ public class RandomGenerator implements GeneratorInterface {
         }
     }
 
+    @Override
+    public String toString() {
+        return "RANDOM";
+    }
+
     @Async
     public void start(CanvasInterface canvas) throws Exception {
         for (int i = 0; i < canvas.getWidth(); i++) {

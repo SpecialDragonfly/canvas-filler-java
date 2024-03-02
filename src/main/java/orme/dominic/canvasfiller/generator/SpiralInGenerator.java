@@ -37,6 +37,11 @@ public class SpiralInGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "SPIRAL-IN";
+    }
+
+    @Override
     @Async("GeneratorThreads")
     public void start(CanvasInterface canvas) throws Exception {
         this.blankCanvas = new BlankCanvas<>(canvas.getWidth(), canvas.getHeight());

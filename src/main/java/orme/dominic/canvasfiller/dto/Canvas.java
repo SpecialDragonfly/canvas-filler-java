@@ -49,6 +49,11 @@ public class Canvas implements CanvasInterface {
         }
     }
 
+    @Override
+    public String getGeneratorName() {
+        return this.generator.toString();
+    }
+
     public ArrayList<Point> getBuffer() {
         return this.buffer;
     }

@@ -24,6 +24,11 @@ public class EmptyGenerator implements GeneratorInterface {
     }
 
     @Override
+    public String toString() {
+        return "EMPTY";
+    }
+
+    @Override
     public Point getPoint(int row, int column) {
         return new Point(column, row, 100, 100, 100);
     }

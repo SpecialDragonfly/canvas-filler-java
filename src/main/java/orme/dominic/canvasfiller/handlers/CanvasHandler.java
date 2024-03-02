@@ -50,6 +50,10 @@ public class CanvasHandler extends TextWebSocketHandler {
                 case "info":
                     System.out.println("Request for info");
                     session.sendMessage(new TextMessage(this.pixelService.toString()));
+                    break;
+                case "clear":
+                    System.out.println("Clearing memory requested");
+
                 default:
                     System.out.println("Unknown command " + parts[0]);
                     // error
