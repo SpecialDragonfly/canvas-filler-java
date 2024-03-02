@@ -8,10 +8,10 @@ import orme.dominic.canvasfiller.dto.Point;
 public class EmptyGenerator implements GeneratorInterface {
     @Override
     @Async
-    public void start(CanvasInterface canvas) {
+    public void start(CanvasInterface canvas) throws Exception {
         for (int i = 0; i < canvas.getWidth(); i++) {
             for (int j = 0; j < canvas.getHeight(); j++) {
-                canvas.getQueue().add(
+                canvas.getQueue().addPoint(
                     new Point(
                         i,
                         j,

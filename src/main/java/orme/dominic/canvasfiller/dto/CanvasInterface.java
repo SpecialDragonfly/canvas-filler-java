@@ -1,7 +1,5 @@
 package orme.dominic.canvasfiller.dto;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 public interface CanvasInterface {
     int getWidth();
 
@@ -9,7 +7,7 @@ public interface CanvasInterface {
 
     void decrementPoint();
 
-    ConcurrentLinkedQueue<Point> getQueue();
+    CanvasQueueInterface getQueue();
 
     int getRemainingPointCount();
 

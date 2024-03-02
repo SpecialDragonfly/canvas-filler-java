@@ -35,7 +35,6 @@ public class CanvasHandler extends TextWebSocketHandler {
         // payload has the format: <command>|<JSON arguments>
 
         String[] parts = payload.split("\\|", 2);
-        System.out.println(parts);
         ObjectMapper jsonParser = new ObjectMapper();
         try {
             switch (parts[0]) {
