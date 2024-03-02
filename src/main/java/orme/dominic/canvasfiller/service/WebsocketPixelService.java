@@ -50,6 +50,7 @@ public class WebsocketPixelService {
             System.out.println("Using Empty Generator");
         }
 
+        System.out.println("Started WebSocket Canvas with " + g.getClass().toString() + " w: " + width + " h: " + height);
         this.canvases.put(queueName, new WebsocketCanvas(session, g, width, height));
         this.canvases.get(queueName).start();
     }
